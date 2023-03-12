@@ -279,9 +279,13 @@ DE_MAST_RE_seurat = function(
   #======== run MAST test ======================
 
   str_plus = if (!is.null(latent.vars)) " + " else ""
+    
+  # count number of detected genes and scale.
+  ngenes <- colSums(assay(sca) > 0)
+  colData(sca)$ngenes <- scale(ngenes)
 
   fmla <- as.formula(
-    object = paste0(" ~ group", str_plus, paste(latent.vars, collapse = " + "), paste(" + (1 |", random_effect.vars, ")", collapse=""))
+    object = paste0(" ~ ngenes + group", str_plus, paste(latent.vars, collapse = " + "), paste(" + (1 |", random_effect.vars, ")", collapse=""))
   )
 
   # fit model parameters
@@ -289,7 +293,7 @@ DE_MAST_RE_seurat = function(
                    sca = sca,
                    method = 'glmer',
                    ebayes = F,
-                   strictConvergence = FALSE,
+                   strictConvergence = T,
                    ...))
 
   zlmCond <- if (verbose) eval(expr) else suppressMessages(eval(expr))
