@@ -14,11 +14,11 @@ Seurat workflow.
 
 ### Install using devtools:
 
-    devtools::install_github("CBMR-Single-Cell-Omics-Platform/SCOPfunctions")
+    devtools::install_github("RoseString/SCOPfunctions")
 
 ### install manually
 
-    git clone https://www.github.com/CBMR-Single-Cell-Omics-Platform/SCOPfunctions.git 
+    git clone https://www.github.com/RoseString/SCOPfunctions.git 
 
 then from R:
 
